@@ -15,8 +15,10 @@ class MainViewModel : ViewModel() {
     var liveList = MutableLiveData<List<Article>>()
     var liveError = MutableLiveData<String>()
 
-    fun getNewsCountry(apiKay: String ,country: String ) {
-        repository.getNewsCountry(country, apiKay).enqueue(object : Callback<NewsApiResponse> {
+
+
+    fun getNewsCountry(category: String) {
+        repository.getNewsCountry(category = category).enqueue(object : Callback<NewsApiResponse> {
             override fun onResponse(
                 call: Call<NewsApiResponse>,
                 response: Response<NewsApiResponse>
@@ -34,8 +36,9 @@ class MainViewModel : ViewModel() {
         })
     }
 
-    fun getNewsCategory(apiKay: String, category: String) {
-        repository.getNewsCategory(apiKay, category)
+
+    fun getNewsSearch(apiKay: String, q: String) {
+        repository.getNewsSearch(apiKay, q)
             .enqueue(object : Callback<NewsApiResponse> {
                 override fun onResponse(
                     call: Call<NewsApiResponse>,
@@ -52,27 +55,6 @@ class MainViewModel : ViewModel() {
                     liveError.postValue(t.message)
                 }
             })
-
-
-        fun getNewsSearch(apiKay: String, q: String) {
-            repository.getNewsCategory(apiKay, q)
-                .enqueue(object : Callback<NewsApiResponse> {
-                    override fun onResponse(
-                        call: Call<NewsApiResponse>,
-                        response: Response<NewsApiResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            response.body()?.let {
-                                liveList.postValue(it.articles)
-                            }
-                        }
-                    }
-
-                    override fun onFailure(call: Call<NewsApiResponse>, t: Throwable) {
-                        liveError.postValue(t.message)
-                    }
-                })
-        }
-
     }
+
 }
