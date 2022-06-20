@@ -11,10 +11,11 @@ class MainAdapter(private val onClickItem: (Article) -> Unit) :
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     var article = emptyList<Article>()
-        set(value) {
-            field = value
-           notifyDataSetChanged()
-        }
+    set(value) {
+        field = value
+        notifyDataSetChanged()
+    }
+
 
     override fun getItemCount(): Int = article.size
 

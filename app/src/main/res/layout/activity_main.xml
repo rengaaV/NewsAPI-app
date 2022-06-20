@@ -80,6 +80,15 @@
 
     </HorizontalScrollView>
 
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:queryHint="Search News ..."
+        android:iconifiedByDefault="false"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_margin="5dp" />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_main"
         android:layout_width="match_parent"

@@ -9,7 +9,7 @@ import com.vagner.news.model.Article
 
 class DetailsActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityDetailsBinding
+    private lateinit var binding: ActivityDetailsBinding
 
     private lateinit var article: Article
 

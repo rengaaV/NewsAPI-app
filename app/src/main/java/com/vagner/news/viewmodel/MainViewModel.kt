@@ -16,9 +16,8 @@ class MainViewModel : ViewModel() {
     var liveError = MutableLiveData<String>()
 
 
-
-    fun getNewsCountry(category: String) {
-        repository.getNewsCountry(category = category).enqueue(object : Callback<NewsApiResponse> {
+    fun getNewsCountry(category: String , q : String ) {
+        repository.getNewsApi(category = category, q = q).enqueue(object : Callback<NewsApiResponse> {
             override fun onResponse(
                 call: Call<NewsApiResponse>,
                 response: Response<NewsApiResponse>
@@ -34,27 +33,6 @@ class MainViewModel : ViewModel() {
                 liveError.postValue(t.message)
             }
         })
-    }
-
-
-    fun getNewsSearch(apiKay: String, q: String) {
-        repository.getNewsSearch(apiKay, q)
-            .enqueue(object : Callback<NewsApiResponse> {
-                override fun onResponse(
-                    call: Call<NewsApiResponse>,
-                    response: Response<NewsApiResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            liveList.postValue(it.articles)
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<NewsApiResponse>, t: Throwable) {
-                    liveError.postValue(t.message)
-                }
-            })
     }
 
 }
